@@ -5,4 +5,10 @@ class Employee < ActiveRecord::Base
   validates :hourly_rate, numericality: { less_than_or_equal_to: 200 }
   validates :hourly_rate, numericality: { greater_than: 39 }
   validates :store, presence: true
+  before_create :add_password, on: :create 
+
+  private
+    def add_password
+      self.password = "password"
+    end
 end
